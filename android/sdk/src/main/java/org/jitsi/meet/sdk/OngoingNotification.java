@@ -109,7 +109,7 @@ class OngoingNotification {
             hangupIntent.setAction(JitsiMeetOngoingConferenceService.Actions.HANGUP);
             PendingIntent hangupPendingIntent
                 = PendingIntent.getService(context, 0, hangupIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            NotificationCompat.Action hangupAction = new NotificationCompat.Action(0, "Hang up", hangupPendingIntent);
+            NotificationCompat.Action hangupAction = new NotificationCompat.Action(0, context.getString(R.string.hang_up_text), hangupPendingIntent);
 
             builder.addAction(hangupAction);
         }

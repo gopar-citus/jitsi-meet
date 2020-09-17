@@ -59,7 +59,7 @@
         "you": "당신"
     },
     "connectingOverlay": {
-        "joiningRoom": ""
+        "joiningRoom": "수다에 접속중입니다..."
     },
     "connection": {
         "ATTACHED": "첨부",
@@ -87,10 +87,10 @@
         "packetloss": "패킷 손실:",
         "quality": {
             "good": "좋음",
-            "inactive": "Inactive",
-            "lost": "Lost",
-            "nonoptimal": "Nonoptimal",
-            "poor": "Poor"
+            "inactive": "비활성",
+            "lost": "잃어버림",
+            "nonoptimal": "비최적",
+            "poor": "나쁨"
         },
         "remoteaddress": "",
         "remoteport": "",

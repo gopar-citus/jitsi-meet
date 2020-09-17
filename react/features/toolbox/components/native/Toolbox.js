@@ -116,6 +116,7 @@ class Toolbox extends PureComponent<Props> {
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
                 <OverflowMenuButton
+                    visible = { false }
                     styles = { buttonStylesBorderless }
                     toggledStyles = { toggledButtonStyles } />
             </View>

@@ -341,7 +341,7 @@ var config = {
     //
 
     // Hides lobby button
-    // hideLobbyButton: false,
+    hideLobbyButton: true,
 
     // Require users to always specify a display name.
     // requireDisplayName: true,
@@ -586,7 +586,7 @@ var config = {
     // disableInviteFunctions: true,
 
     // Disables storing the room name to the recents list
-    // doNotStoreRoom: true,
+    doNotStoreRoom: true,
 
     // Deployment specific URLs.
     // deploymentUrls: {

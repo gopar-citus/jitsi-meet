@@ -2,6 +2,7 @@
 
 import type { Dispatch } from 'redux';
 
+import VideoLayout from '../../../modules/UI/videolayout/VideoLayout';
 import {
     createSelectParticipantFailedEvent,
     sendAnalytics
@@ -18,6 +19,27 @@ import {
 } from './actionTypes';
 
 declare var APP: Object;
+
+/**
+ * Resizes the large video container based on the dimensions provided.
+ *
+ * @param {number} width - Width that needs to be applied on the large video container.
+ * @param {number} height - Height that needs to be applied on the large video container.
+ * @returns {void}
+ */
+export function resizeLargeVideo(width: number, height: number) {
+    return (dispatch: Dispatch<any>, getState: Function) => {
+        const state = getState();
+        const largeVideo = state['features/large-video'];
+
+        if (largeVideo) {
+            const largeVideoContainer = VideoLayout.getLargeVideo();
+
+            largeVideoContainer.updateContainerSize(width, height);
+            largeVideoContainer.resize();
+        }
+    };
+}
 
 /**
  * Signals conference to select a participant.
@@ -49,16 +71,19 @@ export function selectParticipant() {
 }
 
 /**
- * Action to select the participant to be displayed in LargeVideo based on a
- * variety of factors: If there is a dominant or pinned speaker, or if there are
- * remote tracks, etc.
+ * Action to select the participant to be displayed in LargeVideo based on the
+ * participant id provided. If a partcipant id is not provided, the LargeVideo
+ * participant will be selected based on a variety of factors: If there is a
+ * dominant or pinned speaker, or if there are remote tracks, etc.
  *
+ * @param {string} participant - The participant id of the user that needs to be
+ * displayed on the large video.
  * @returns {Function}
  */
-export function selectParticipantInLargeVideo() {
+export function selectParticipantInLargeVideo(participant: ?string) {
     return (dispatch: Dispatch<any>, getState: Function) => {
         const state = getState();
-        const participantId = _electParticipantInLargeVideo(state);
+        const participantId = participant ?? _electParticipantInLargeVideo(state);
         const largeVideo = state['features/large-video'];
 
         if (participantId !== largeVideo.participantId) {

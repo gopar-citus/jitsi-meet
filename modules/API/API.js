@@ -21,6 +21,7 @@ import {
 import { isEnabled as isDropboxEnabled } from '../../react/features/dropbox';
 import { toggleE2EE } from '../../react/features/e2ee/actions';
 import { invite } from '../../react/features/invite';
+import { resizeLargeVideo, selectParticipantInLargeVideo } from '../../react/features/large-video/actions';
 import { toggleLobbyMode } from '../../react/features/lobby/actions.web';
 import { RECORDING_TYPES } from '../../react/features/recording/constants';
 import { getActiveSession } from '../../react/features/recording/functions';
@@ -118,10 +119,20 @@ function initCommands() {
         'proxy-connection-event': event => {
             APP.conference.onProxyConnectionEvent(event);
         },
+        'resize-large-video': (width, height) => {
+            logger.debug('Resize large video command received');
+            sendAnalytics(createApiEvent('largevideo.resized'));
+            APP.store.dispatch(resizeLargeVideo(width, height));
+        },
         'send-tones': (options = {}) => {
             const { duration, tones, pause } = options;
 
             APP.store.dispatch(sendTones(tones, duration, pause));
+        },
+        'set-large-video-participant': participantId => {
+            logger.debug('Set large video participant command received');
+            sendAnalytics(createApiEvent('largevideo.participant.set'));
+            APP.store.dispatch(selectParticipantInLargeVideo(participantId));
         },
         'subject': subject => {
             sendAnalytics(createApiEvent('subject.changed'));
@@ -691,6 +702,21 @@ class API {
     }
 
     /**
+     * Notify external application (if API is enabled) that the an error has been logged.
+     *
+     * @param {string} logLevel - The message log level.
+     * @param {Array} args - Array of strings composing the log message.
+     * @returns {void}
+     */
+    notifyLog(logLevel: string, args: Array<string>) {
+        this._sendEvent({
+            name: 'log',
+            logLevel,
+            args
+        });
+    }
+
+    /**
      * Notify external application (if API is enabled) that the conference has
      * been joined.
      *
@@ -710,8 +736,7 @@ class API {
     }
 
     /**
-     * Notify external application (if API is enabled) that user changed their
-     * nickname.
+     * Notify external application (if API is enabled) that local user has left the conference.
      *
      * @param {string} roomName - User id.
      * @returns {void}

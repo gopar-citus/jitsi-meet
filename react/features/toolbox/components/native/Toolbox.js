@@ -97,7 +97,7 @@ class Toolbox extends PureComponent<Props> {
      */
     _renderToolbar() {
         const { _styles } = this.props;
-        const { buttonStyles, buttonStylesBorderless, hangupButtonStyles, toggledButtonStyles } = _styles;
+        const { buttonStyles, buttonStylesBorderless, buttonStylesBorderlessInvisible, hangupButtonStyles, toggledButtonStyles } = _styles;
 
         return (
             <View
@@ -116,8 +116,7 @@ class Toolbox extends PureComponent<Props> {
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
                 <OverflowMenuButton
-                    visible = { false }
-                    styles = { buttonStylesBorderless }
+                    styles = { buttonStylesBorderlessInvisible }
                     toggledStyles = { toggledButtonStyles } />
             </View>
         );

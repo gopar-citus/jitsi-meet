@@ -110,6 +110,25 @@ ColorSchemeRegistry.register('Toolbox', {
         }
     },
 
+    buttonStylesBorderlessInvisible: {
+        iconStyle: whiteToolbarButtonIcon,
+        style: {
+            backgroundColor: schemeColor('button'),
+            borderRadius: BUTTON_SIZE / 2,
+            borderWidth: 0,
+            flex: 0,
+            flexDirection: 'row',
+            justifyContent: 'center',
+        
+            // XXX We probably tested BoxModel.margin and discovered it to be too small
+            // for our taste.
+            marginHorizontal: 7,
+            width: BUTTON_SIZE,            
+            opacity: 0, height: 0,                        
+            backgroundColor: 'transparent'
+        }
+    },
+
     /**
      * Overrides to the standard styles that we apply to the chat button, as
      * that behaves slightly differently to other buttons.

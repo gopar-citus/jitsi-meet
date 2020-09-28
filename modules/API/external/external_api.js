@@ -35,6 +35,8 @@ const commands = {
     hangup: 'video-hangup',
     muteEveryone: 'mute-everyone',
     password: 'password',
+    pinParticipant: 'pin-participant',
+    resizeLargeVideo: 'resize-large-video',
     sendEndpointTextMessage: 'send-endpoint-text-message',
     sendTones: 'send-tones',
     setLargeVideoParticipant: 'set-large-video-participant',
@@ -634,6 +636,18 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     }
 
     /**
+     * Captures the screenshot of the large video.
+     *
+     * @returns {Promise<string>} - Resolves with a base64 encoded image data of the screenshot
+     * if large video is detected, an error otherwise.
+     */
+    captureLargeVideoScreenshot() {
+        return this._transport.sendRequest({
+            name: 'capture-largevideo-screenshot'
+        });
+    }
+
+    /**
      * Removes the listeners and removes the Jitsi Meet frame.
      *
      * @returns {void}
@@ -902,6 +916,17 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
         return this._transport.sendRequest({
             name: 'is-video-muted'
         });
+    }
+
+    /**
+     * Pins a participant's video on to the stage view.
+     *
+     * @param {string} participantId - Participant id (JID) of the participant
+     * that needs to be pinned on the stage view.
+     * @returns {void}
+     */
+    pinParticipant(participantId) {
+        this.executeCommand('pinParticipant', participantId);
     }
 
     /**

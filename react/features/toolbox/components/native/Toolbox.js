@@ -14,6 +14,7 @@ import HangupButton from '../HangupButton';
 import VideoMuteButton from '../VideoMuteButton';
 
 import OverflowMenuButton from './OverflowMenuButton';
+import ToggleCameraButton from './ToggleCameraButton';
 import styles from './styles';
 
 /**
@@ -115,9 +116,12 @@ class Toolbox extends PureComponent<Props> {
                 <VideoMuteButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
-                <OverflowMenuButton
+                {/* <OverflowMenuButton
                     styles = { buttonStylesBorderlessInvisible }
-                    toggledStyles = { toggledButtonStyles } />
+                    toggledStyles = { toggledButtonStyles } /> */}
+                <ToggleCameraButton 
+                    styles = { buttonStyles }
+                    toggledStyles = { toggledButtonStyles }  />    
             </View>
         );
     }

@@ -74,6 +74,7 @@ export function getTileViewGridDimensions(state: Object, maxColumns: number = ge
  */
 export function shouldDisplayTileView(state: Object = {}) {
     const participantCount = getParticipantCount(state);
+    return false
 
     // In case of a lonely meeting, we don't allow tile view.
     // But it's a special case too, as we don't even render the button,

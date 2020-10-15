@@ -1,4 +1,3 @@
-import { jitsiLocalStorage } from '@jitsi/js-utils/jitsi-local-storage';
 import EventEmitter from 'events';
 
 import { urlObjectToString } from '../../../react/features/base/util/uri';
@@ -269,7 +268,6 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
             userInfo,
             e2eeKey
         } = parseArguments(args);
-        const localStorageContent = jitsiLocalStorage.getItem('jitsiLocalStorage');
 
         this._parentNode = parentNode;
         this._url = generateURL(domain, {
@@ -279,10 +277,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
             noSSL,
             roomName,
             devices,
-            userInfo,
-            appData: {
-                localStorageContent
-            }
+            userInfo
         });
         this._createIFrame(height, width, onload);
         this._transport = new Transport({
@@ -529,11 +524,6 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
             case 'video-quality-changed':
                 this._videoQuality = data.videoQuality;
                 break;
-            case 'local-storage-changed':
-                jitsiLocalStorage.setItem('jitsiLocalStorage', data.localStorageContent);
-
-                // Since this is internal event we don't need to emit it to the consumer of the API.
-                return true;
             }
 
             const eventName = events[name];

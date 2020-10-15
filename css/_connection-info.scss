@@ -45,8 +45,10 @@
         @extend .connection-info__icon;
     }
 
-    .connection-actions {
+    .showmore {
+        display: block;
         margin: 10px auto;
         text-align: center;
+        width: 90px;
     }
 }

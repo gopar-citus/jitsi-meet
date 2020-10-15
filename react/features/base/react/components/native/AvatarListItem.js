@@ -53,11 +53,6 @@ type Props = {
     linesStyle?: StyleType,
 
     /**
-     * Function to invoke on long press.
-     */
-    onLongPress: ?Function,
-
-    /**
      * Function to invoke on press.
      */
     onPress: ?Function,
@@ -93,16 +88,13 @@ export default class AvatarListItem extends Component<Props> {
             avatarOnly,
             avatarSize = AVATAR_SIZE,
             avatarStatus,
-            avatarStyle,
-            onLongPress,
-            onPress
+            avatarStyle
         } = this.props;
         const { avatar, colorBase, lines, title } = this.props.item;
 
         return (
             <Container
-                onClick = { onPress }
-                onLongPress = { onLongPress }
+                onClick = { this.props.onPress }
                 style = { styles.listItem }
                 underlayColor = { UNDERLAY_COLOR }>
                 <Avatar

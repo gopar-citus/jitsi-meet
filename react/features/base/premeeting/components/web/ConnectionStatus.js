@@ -61,9 +61,6 @@ function ConnectionStatus({ connectionDetails, t, connectionType }: Props) {
         ? 'con-status-arrow con-status-arrow--up'
         : 'con-status-arrow';
     const detailsText = connectionDetails.map(t).join(' ');
-    const detailsClassName = showDetails
-        ? 'con-status-details-visible'
-        : 'con-status-details-hidden';
 
     return (
         <div className = 'con-status'>
@@ -82,7 +79,8 @@ function ConnectionStatus({ connectionDetails, t, connectionType }: Props) {
                         size = { 24 }
                         src = { IconArrowDownSmall } />
                 </div>
-                <div className = { `con-status-details ${detailsClassName}` }>{detailsText}</div>
+                { showDetails
+                  && <div className = 'con-status-details'>{detailsText}</div> }
             </div>
         </div>
     );

@@ -50,12 +50,6 @@ export const INVITE_ENABLED = 'invite.enabled';
 export const IOS_RECORDING_ENABLED = 'ios.recording.enabled';
 
 /**
- * Flag indicating if kickout is enabled.
- * Default: enabled (true).
- */
-export const KICK_OUT_ENABLED = 'kick-out.enabled';
-
-/**
  * Flag indicating if live-streaming should be enabled.
  * Default: auto-detected.
  */

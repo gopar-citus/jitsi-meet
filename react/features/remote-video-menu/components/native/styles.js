@@ -10,13 +10,10 @@ import { ColorPalette, createStyleSheet } from '../../../base/styles';
 export default createStyleSheet({
     participantNameContainer: {
         alignItems: 'center',
-        borderBottomColor: ColorPalette.lightGrey,
+        borderBottomColor: ColorPalette.darkGrey,
         borderBottomWidth: 1,
-        borderTopLeftRadius: 16,
-        borderTopRightRadius: 16,
         flexDirection: 'row',
-        height: MD_ITEM_HEIGHT,
-        paddingLeft: MD_ITEM_MARGIN_PADDING
+        height: MD_ITEM_HEIGHT
     },
 
     participantNameLabel: {

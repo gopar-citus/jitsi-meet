@@ -92,11 +92,15 @@ class LobbyScreen extends AbstractLobbyScreen {
         const { t } = this.props;
 
         return (
-            <InputField
-                onChange = { this._onChangeDisplayName }
-                placeHolder = { t('lobby.nameField') }
-                testId = 'lobby.nameField'
-                value = { displayName } />
+            <div className = 'participant-info'>
+                <div className = 'form'>
+                    <InputField
+                        onChange = { this._onChangeDisplayName }
+                        placeHolder = { t('lobby.nameField') }
+                        testId = 'lobby.nameField'
+                        value = { displayName } />
+                </div>
+            </div>
         );
     }
 
@@ -109,13 +113,15 @@ class LobbyScreen extends AbstractLobbyScreen {
         const { _passwordJoinFailed, t } = this.props;
 
         return (
-            <InputField
-                className = { _passwordJoinFailed ? 'error' : '' }
-                onChange = { this._onChangePassword }
-                placeHolder = { _passwordJoinFailed ? t('lobby.invalidPassword') : t('lobby.passwordField') }
-                testId = 'lobby.password'
-                type = 'password'
-                value = { this.state.password } />
+            <div className = 'form'>
+                <InputField
+                    className = { _passwordJoinFailed ? 'error' : '' }
+                    onChange = { this._onChangePassword }
+                    placeHolder = { _passwordJoinFailed ? t('lobby.invalidPassword') : t('lobby.passwordField') }
+                    testId = 'lobby.password'
+                    type = 'password'
+                    value = { this.state.password } />
+            </div>
         );
     }
 

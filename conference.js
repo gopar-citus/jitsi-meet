@@ -104,8 +104,10 @@ import {
     trackAdded,
     trackRemoved
 } from './react/features/base/tracks';
-import { downloadJSON } from './react/features/base/util/downloadJSON';
-import { getConferenceOptions } from './react/features/conference/functions';
+import {
+    getBackendSafePath,
+    getJitsiMeetGlobalNS
+} from './react/features/base/util';
 import { showDesktopPicker } from './react/features/desktop-picker';
 import { appendSuffix } from './react/features/display-name';
 import {
@@ -121,6 +123,7 @@ import {
     isPrejoinPageVisible,
     makePrecallTest
 } from './react/features/prejoin';
+import { createRnnoiseProcessorPromise } from './react/features/rnnoise';
 import { toggleScreenshotCaptureEffect } from './react/features/screenshot-capture';
 import { setSharedVideoStatus } from './react/features/shared-video';
 import { AudioMixerEffect } from './react/features/stream-effects/audio-mixer/AudioMixerEffect';
@@ -1218,8 +1221,19 @@ export default {
         // this can be called from console and will not have reference to this
         // that's why we reference the global var
         const logs = APP.connection.getLogs();
+        const data = encodeURIComponent(JSON.stringify(logs, null, '  '));
 
-        downloadJSON(logs, filename);
+        const elem = document.createElement('a');
+
+        elem.download = filename;
+        elem.href = `data:application/json;charset=utf-8,\n${data}`;
+        elem.dataset.downloadurl
+            = [ 'text/json', elem.download, elem.href ].join(':');
+        elem.dispatchEvent(new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: false
+        }));
     },
 
     /**
@@ -1315,7 +1329,53 @@ export default {
     },
 
     _getConferenceOptions() {
-        return getConferenceOptions(APP.store.getState());
+        const options = config;
+        const { email, name: nick } = getLocalParticipant(APP.store.getState());
+
+        const state = APP.store.getState();
+        const { locationURL } = state['features/base/connection'];
+        const { tenant } = state['features/base/jwt'];
+
+        if (tenant) {
+            options.siteID = tenant;
+        }
+
+        if (options.enableDisplayNameInStats && nick) {
+            options.statisticsDisplayName = nick;
+        }
+
+        if (options.enableEmailInStats && email) {
+            options.statisticsId = email;
+        }
+
+        options.applicationName = interfaceConfig.APP_NAME;
+        options.getWiFiStatsMethod = this._getWiFiStatsMethod;
+        options.confID = `${locationURL.host}${getBackendSafePath(locationURL.pathname)}`;
+        options.createVADProcessor = createRnnoiseProcessorPromise;
+
+        // Disable CallStats, if requessted.
+        if (options.disableThirdPartyRequests) {
+            delete options.callStatsID;
+            delete options.callStatsSecret;
+            delete options.getWiFiStatsMethod;
+        }
+
+        return options;
+    },
+
+    /**
+     * Returns the result of getWiFiStats from the global NS or does nothing
+     * (returns empty result).
+     * Fixes a concurrency problem where we need to pass a function when creating
+     * JitsiConference, but that method is added to the context later.
+     *
+     * @returns {Promise}
+     * @private
+     */
+    _getWiFiStatsMethod() {
+        const gloabalNS = getJitsiMeetGlobalNS();
+
+        return gloabalNS.getWiFiStats ? gloabalNS.getWiFiStats() : Promise.resolve('{}');
     },
 
     /**

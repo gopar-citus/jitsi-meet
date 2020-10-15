@@ -99,7 +99,6 @@
     },
     "connectionindicator": {
         "address": "Address:",
-        "audio_ssrc": "Audio SSRC:",
         "bandwidth": "Estimated bandwidth:",
         "bitrate": "Bitrate:",
         "bridgeCount": "Server count: ",
@@ -127,12 +126,9 @@
         "remoteport": "Remote port:",
         "remoteport_plural": "Remote ports:",
         "resolution": "Resolution:",
-        "savelogs": "Save logs",
-        "participant_id": "Participant id:",
         "status": "Connection:",
         "transport": "Transport:",
-        "transport_plural": "Transports:",
-        "video_ssrc": "Video SSRC:"
+        "transport_plural": "Transports:"
     },
     "dateUtils": {
         "earlier": "Earlier",
@@ -366,7 +362,7 @@
         "password": "$t(lockRoomPasswordUppercase):",
         "title": "Share",
         "tooltip": "Share link and dial-in info for this meeting",
-        "label": "Dial-in info"
+        "label": "Meeting info"
     },
     "inviteDialog": {
         "alertText": "Failed to invite some participants.",
@@ -536,7 +532,7 @@
         "dialInMeeting": "Dial into the meeting",
         "dialInPin": "Dial into the meeting and enter PIN code:",
         "dialing": "Dialing",
-        "doNotShow": "Don't show this screen again",
+        "doNotShow": "Don't show this again",
         "errorDialOut": "Could not dial out",
         "errorDialOutDisconnected": "Could not dial out. Disconnected",
         "errorDialOutFailed": "Could not dial out. Call failed",
@@ -876,12 +872,12 @@
         "getHelp": "Get help",
         "go": "GO",
         "goSmall": "GO",
-        "info": "Dial-in info",
+        "info": "Info",
         "join": "CREATE / JOIN",
         "moderatedMessage": "Or <a href=\"{{url}}\" rel=\"noopener noreferrer\" target=\"_blank\">book a meeting URL</a> in advance where you are the only moderator.",
         "privacy": "Privacy",
         "recentList": "Recent",
-        "recentListDelete": "Delete entry",
+        "recentListDelete": "Delete",
         "recentListEmpty": "Your recent list is currently empty. Chat with your team and you will find all your recent meetings here.",
         "reducedUIText": "Welcome to {{app}}!",
         "roomNameAllowedChars": "Meeting name should not contain any of these characters: ?, &, :, ', \", %, #.",

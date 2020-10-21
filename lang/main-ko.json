@@ -65,7 +65,7 @@
         "fieldPlaceHolder": "여기에 메세지를 입력하세요",
         "messagebox": "메시지 입력",
         "messageTo": "{{recipient}}에게 보내는 비공개 메시지",
-        "noMessagesMessage": "아직 메시지가 없습니다. 여기서 대화를 시작하세요!",
+        "noMessagesMessage": "아직 메시지가 없습니다.",
         "nickname": {
             "popover": "닉네임을 선택하세요",
             "title": "채팅을 사용하려면 닉네임을 입력하세요."

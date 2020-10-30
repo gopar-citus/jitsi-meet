@@ -47,7 +47,8 @@ var interfaceConfig = {
     DEFAULT_BACKGROUND: '#474747',
     DEFAULT_LOCAL_DISPLAY_NAME: '나',
     DEFAULT_LOGO_URL: 'images/watermark.png',
-    //DEFAULT_REMOTE_DISPLAY_NAME: 'Fellow Jitster',
+
+    // DEFAULT_REMOTE_DISPLAY_NAME: 'Fellow Jitster',
     DEFAULT_REMOTE_DISPLAY_NAME: '참여자',
     DEFAULT_WELCOME_PAGE_LOGO_URL: 'images/watermark.png',
 

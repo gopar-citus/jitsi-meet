@@ -124,6 +124,10 @@ export default {
         top: 0
     },
 
+    chatOverlay: {
+        height: 80
+    },
+
     navBarWrapper: {
         alignItems: 'center',
         flex: 1,

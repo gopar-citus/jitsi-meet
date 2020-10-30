@@ -295,8 +295,9 @@ class Conference extends AbstractConference<Props, *> {
 
                     <Labels />
 
-
-                    <ChatOverlay />
+                    <Container style = { styles.chatOverlay } >
+                        <ChatOverlay />
+                    </Container>
 
                     <Captions onPress = { this._onClick } />
 
